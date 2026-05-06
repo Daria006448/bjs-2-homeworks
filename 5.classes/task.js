@@ -7,37 +7,37 @@ class PrintEditionItem {
             this.type = null;
         }
 
-    fix(){
-        return this.state = this._state * 1.5;
-    }
-
-    set fixState(Newstate){
+    set state(Newstate){
         if (Newstate < 0) {
             this._state = 0;
-        } if (Newstate > 100) {
+        } else if (Newstate > 100) {
             this._state = 100;
         } else {
             this._state = Newstate
         }
     }
 
-    get State(){
+    get state(){
         return this._state;
+    }
+
+    fix(){
+        return this.state = this._state * 1.5;
     }
 }
 
 class Magazine extends PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {
         super(name, releaseDate, pagesCount)
-            this.type = "magazine";
+        this.type = "magazine";
     }
 }
 
 class Book extends PrintEditionItem {
     constructor(author, name, releaseDate, pagesCount) {
-        super(author, name, releaseDate, pagesCount)
+        super(name, releaseDate, pagesCount)
         this.type = "book";
-        this.author = this.author;
+        this.author = author;
     }
 }
     
@@ -79,7 +79,7 @@ class Library{
     }
 
     giveBookByName(bookName){
-        const booIndex = this.books.findIndex(book => book.name === bookName);
+        const bookIndex = this.books.findIndex(book => book.name === bookName);
         if (bookIndex  !== -1){
             return this.books.splice(bookIndex, 1)[0];
         }
